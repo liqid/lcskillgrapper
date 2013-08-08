@@ -34,30 +34,41 @@ class GrapSkills {
         $xpath = new \DOMXPath($this->page);
         foreach ($tables as $table) {
             if (!$table->hasAttribute('class')) {
-                    // $skillId = 1;
-                    $trs = $table->firstChild->getElementsByTagName('tr');
-                    $trIndex = 0;
-                    foreach ($trs as $key => $tr) {
-                        $tds = $tr->getElementsByTagName('td');
-                        $tdIndex = 0;
-                        foreach ($tds as $td) {
-                            if ($trIndex == 0) {
-                                if ($tdIndex == 0) {
-                                    $skillImage = $td->firstChild->getAttribute('src');
-                                    var_dump($skillImage);
-                                } else {
-                                    $skillName = $xpath->query('descendant::*/text()',$td->firstChild)->item(0)->textContent;
-                                    var_dump($skillName);
-                                }
-                                
-                            }
-                            $tdIndex++;
-                        }
+                $skillId = 1;
+                $trs = $table->firstChild->getElementsByTagName('tr');
+                $trIndex = 0;
+                foreach ($trs as $key => $tr) {
+                    $tds = $tr->getElementsByTagName('td');
+                    $tdIndex = 0;
+                    foreach ($tds as $td) {
                         if ($trIndex == 0) {
-                            break;
+                            if ($tdIndex == 0) {
+                                $skillImage = $td->firstChild->getAttribute('src');
+                                var_dump($skillImage);
+                            } else {
+                                $skillName = $xpath->query('descendant::*/text()',$td->firstChild)->item(0)->textContent;
+                                var_dump($skillName);
+                            }
+                        } else {
+                            if ($tdIndex == 0) {
+                                switch (variable) {
+                                    case 'value':
+                                        
+                                        break;
+                                    
+                                    default:
+                                        
+                                        break;
+                                }
+                            }
                         }
+                        $tdIndex++;
                     }
-                    $one = 'bla';
+                    if ($trIndex == 0) {
+                        break;
+                    }
+                }
+                $one = 'bla';
                 break;
             }
         }
