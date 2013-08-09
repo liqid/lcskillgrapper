@@ -29,7 +29,7 @@ class GrapSkills {
     
     function grap() {
         $tables = $this->page->getElementsByTagName('table');
-        $one = '';
+        $one = array();
         $test = 0;
         $xpath = new \DOMXPath($this->page);
         foreach ($tables as $table) {
@@ -43,36 +43,28 @@ class GrapSkills {
                     foreach ($tds as $td) {
                         if ($trIndex == 0) {
                             if ($tdIndex == 0) {
-                                $skillImage = $td->firstChild->getAttribute('src');
-                                var_dump($skillImage);
+                                // $skillImage = $td->firstChild->getAttribute('src');
+                                // var_dump($skillImage);
                             } else {
                                 $skillName = $xpath->query('descendant::*/text()',$td->firstChild)->item(0)->textContent;
-                                var_dump($skillName);
                             }
                         } else {
                             if ($tdIndex == 0) {
-                                switch (variable) {
-                                    case 'value':
-                                        
-                                        break;
-                                    
-                                    default:
-                                        
-                                        break;
-                                }
+                               $bla = $xpath->query('text()',$td->firstChild)->item(0)->textContent;
+                               if (!isset($one[$bla])) {
+                                   $one[$bla] = 1;
+                               } else {
+                                   $one[$bla]++;
+                               }
                             }
                         }
                         $tdIndex++;
                     }
-                    if ($trIndex == 0) {
-                        break;
-                    }
+                    $trIndex++;
                 }
-                $one = 'bla';
-                break;
             }
         }
-var_dump($test);
+var_dump($one);
         return $one;
     }
 }
